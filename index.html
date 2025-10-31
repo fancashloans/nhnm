@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oyster Loan - Payment History</title>
+    <title>Oyster Loan - Payment Verification Portal</title>
     <style>
         * {
             margin: 0;
@@ -12,183 +12,243 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .header {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            color: white;
-            font-weight: bold;
+            font-size: 36px;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .brand-info {
+            flex: 1;
         }
 
         .brand-name {
-            font-size: 32px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .tagline {
-            color: #666;
-            font-size: 14px;
+            color: #64748b;
+            font-size: 15px;
             margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .verified-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
-            margin-top: 20px;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            padding: 25px;
+            border-radius: 16px;
             color: white;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
         }
 
         .stat-label {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 8px;
+            font-size: 13px;
+            opacity: 0.95;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
         }
 
         .content-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .badge {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .filter-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
+            background: #f1f5f9;
+            padding: 8px;
+            border-radius: 12px;
         }
 
         .tab {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
-            border: 2px solid #e5e7eb;
-            background: white;
+            border: none;
+            background: transparent;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 14px;
             transition: all 0.3s;
+            color: #64748b;
         }
 
         .tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
             color: white;
-            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
         }
 
         .payout-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .payout-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px;
-            border: 2px solid #f3f4f6;
-            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
             transition: all 0.3s;
+            background: white;
         }
 
         .payout-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+            border-color: #0ea5e9;
+            box-shadow: 0 8px 24px rgba(14, 165, 233, 0.15);
+            transform: translateY(-2px);
         }
 
         .payout-item.today {
-            background: #f0fdf4;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
             border-color: #10b981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
         }
 
         .payout-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             flex: 1;
         }
 
         .bank-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 800;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .bank-absa { background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); }
-        .bank-standard { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); }
+        .bank-absa { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+        .bank-standard { background: linear-gradient(135deg, #0284c7 0%, #075985 100%); }
         .bank-fnb { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .bank-capitec { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .bank-capitec { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
         .bank-tyme { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
         .bank-african { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); }
 
@@ -196,16 +256,49 @@
             flex: 1;
         }
 
+        .recipient-name {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
         .bank-name {
             font-weight: 600;
-            color: #333;
+            color: #475569;
             margin-bottom: 4px;
+            font-size: 14px;
         }
 
         .account-number {
             font-size: 13px;
-            color: #666;
+            color: #94a3b8;
             font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .payout-middle {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .paid-from {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .oyster-badge {
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
         }
 
         .payout-right {
@@ -213,42 +306,62 @@
         }
 
         .amount {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 20px;
+            font-weight: 800;
             color: #10b981;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .date {
             font-size: 12px;
-            color: #666;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .status {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
-            background: #d1fae5;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
             color: #065f46;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 12px;
-            font-weight: 600;
-            margin-top: 4px;
+            font-weight: 700;
         }
 
         .status-dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             background: #10b981;
             border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .footer {
             text-align: center;
             color: white;
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-brand {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 14px;
             opacity: 0.9;
         }
 
@@ -256,7 +369,12 @@
             .payout-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 15px;
+            }
+
+            .payout-middle {
+                padding: 0;
+                text-align: left;
             }
 
             .payout-right {
@@ -266,6 +384,14 @@
                 justify-content: space-between;
                 align-items: center;
             }
+
+            .header {
+                padding: 25px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
         }
     </style>
 </head>
@@ -274,9 +400,12 @@
         <div class="header">
             <div class="logo-section">
                 <div class="logo">🦪</div>
-                <div>
+                <div class="brand-info">
                     <div class="brand-name">Oyster Loan</div>
-                    <div class="tagline">Trusted Financial Solutions</div>
+                    <div class="tagline">Trusted Financial Solutions for South Africa</div>
+                </div>
+                <div class="verified-badge">
+                    ✓ Verified Payments
                 </div>
             </div>
             
@@ -293,38 +422,62 @@
                     <div class="stat-label">Today's Payouts</div>
                     <div class="stat-value">5</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-value">100%</div>
+                </div>
             </div>
         </div>
 
         <div class="content-card">
-            <div class="section-title">
-                Payment History
-                <span class="badge">All Successful</span>
+            <div class="section-header">
+                <div class="section-title">
+                    Payment Verification Portal
+                    <span class="badge">All Successful</span>
+                </div>
             </div>
 
             <div class="filter-tabs">
-                <div class="tab active" onclick="filterPayouts('all')">All Payouts (55)</div>
-                <div class="tab" onclick="filterPayouts('today')">Today (5)</div>
-                <div class="tab" onclick="filterPayouts('month')">This Month (25)</div>
+                <button class="tab active" onclick="filterPayouts('all')">All Payouts (55)</button>
+                <button class="tab" onclick="filterPayouts('today')">Today (5)</button>
+                <button class="tab" onclick="filterPayouts('month')">This Month (25)</button>
+                <button class="tab" onclick="filterPayouts('last30')">Last 30 Days (30)</button>
             </div>
 
             <div class="payout-list" id="payoutList"></div>
         </div>
 
         <div class="footer">
-            <p><strong>Oyster Loan</strong> - Empowering Your Financial Future</p>
-            <p style="font-size: 14px; margin-top: 10px;">All transactions are secure and verified</p>
+            <div class="footer-brand">🦪 Oyster Loan</div>
+            <div class="footer-text">Empowering Your Financial Future | All transactions are secure and verified</div>
+            <div class="footer-text" style="margin-top: 10px; font-size: 12px; opacity: 0.7;">
+                Regulated Financial Services Provider | South Africa
+            </div>
         </div>
     </div>
 
     <script>
         const banks = [
-            { name: 'ABSA Bank', class: 'bank-absa', abbr: 'AB' },
-            { name: 'Standard Bank', class: 'bank-standard', abbr: 'SB' },
-            { name: 'FNB Bank', class: 'bank-fnb', abbr: 'FN' },
-            { name: 'Capitec', class: 'bank-capitec', abbr: 'CP' },
-            { name: 'Tyme Bank', class: 'bank-tyme', abbr: 'TY' },
-            { name: 'African Bank', class: 'bank-african', abbr: 'AF' }
+            { name: 'ABSA Bank', class: 'bank-absa', abbr: 'ABSA' },
+            { name: 'Standard Bank', class: 'bank-standard', abbr: 'STD' },
+            { name: 'FNB Bank', class: 'bank-fnb', abbr: 'FNB' },
+            { name: 'Capitec', class: 'bank-capitec', abbr: 'CAP' },
+            { name: 'Tyme Bank', class: 'bank-tyme', abbr: 'TYME' },
+            { name: 'African Bank', class: 'bank-african', abbr: 'AFR' }
+        ];
+
+        const southAfricanNames = [
+            'Thabo Mbeki', 'Sipho Nkosi', 'Zanele Dlamini', 'Lerato Mokoena', 'Mandla Khumalo',
+            'Nomsa Zulu', 'Bongani Mthembu', 'Thandiwe Ndlovu', 'Kagiso Molefe', 'Lindiwe Sithole',
+            'Mpho Radebe', 'Nandi Mkhize', 'Sello Mahlangu', 'Precious Ngcobo', 'Tshepo Motaung',
+            'Nokuthula Shabalala', 'Andile Cele', 'Busisiwe Khoza', 'Dumisani Zwane', 'Thembi Naidoo',
+            'Pieter van der Merwe', 'Annelie Botha', 'Johan Pretorius', 'Marietjie du Plessis', 'Hendrik Venter',
+            'Elmarie Fourie', 'Francois Steyn', 'Lizelle Kruger', 'Danie Coetzee', 'Elize van Wyk',
+            'Kobus Erasmus', 'Annelize Visser', 'Riaan Joubert', 'Marlene Swart', 'Gerhard Nel',
+            'Chantelle Olivier', 'Jaco Smit', 'Ilse Brink', 'Werner Schoeman', 'Leana Marais',
+            'Thandi Mahlangu', 'Pieter Bosman', 'Nomvula Dube', 'Francois Louw', 'Zanele van Rensburg',
+            'Johan Nkosi', 'Annelie Mthembu', 'Sipho Pretorius', 'Lerato Viljoen', 'Bongani Steenkamp',
+            'Elmarie Khumalo', 'Tshepo du Toit', 'Lindiwe Fourie', 'Danie Molefe', 'Precious Kruger'
         ];
 
         function generateAccountNumber() {
@@ -332,26 +485,47 @@
         }
 
         function generateAmount() {
-            return (Math.random() * (15000 - 2000) + 2000).toFixed(2);
+            return (Math.random() * (18000 - 2500) + 2500).toFixed(2);
         }
 
         function getRandomBank() {
             return banks[Math.floor(Math.random() * banks.length)];
         }
 
+        function getRandomName() {
+            return southAfricanNames[Math.floor(Math.random() * southAfricanNames.length)];
+        }
+
         function generatePayouts() {
             const payouts = [];
             const today = new Date();
+            const usedNames = new Set();
+
+            function getUniqueName() {
+                let name;
+                do {
+                    name = getRandomName();
+                } while (usedNames.has(name) && usedNames.size < southAfricanNames.length);
+                usedNames.add(name);
+                return name;
+            }
             
             // Generate 5 payouts for today
             for (let i = 0; i < 5; i++) {
                 const bank = getRandomBank();
+                const hour = 8 + Math.floor(Math.random() * 10); // Between 8 AM and 6 PM
+                const minute = Math.floor(Math.random() * 60);
+                const date = new Date(today);
+                date.setHours(hour, minute, 0, 0);
+                
                 payouts.push({
+                    name: getUniqueName(),
                     bank: bank,
                     accountNumber: generateAccountNumber(),
                     amount: generateAmount(),
-                    date: today,
-                    isToday: true
+                    date: date,
+                    isToday: true,
+                    category: 'today'
                 });
             }
 
@@ -359,30 +533,48 @@
             const currentMonth = today.getMonth();
             const currentYear = today.getFullYear();
             for (let i = 0; i < 20; i++) {
-                const randomDay = Math.floor(Math.random() * today.getDate()) + 1;
-                const date = new Date(currentYear, currentMonth, randomDay);
+                const randomDay = Math.floor(Math.random() * (today.getDate() - 1)) + 1;
+                const hour = 8 + Math.floor(Math.random() * 10);
+                const minute = Math.floor(Math.random() * 60);
+                const date = new Date(currentYear, currentMonth, randomDay, hour, minute);
                 const bank = getRandomBank();
+                
                 payouts.push({
+                    name: getUniqueName(),
                     bank: bank,
                     accountNumber: generateAccountNumber(),
                     amount: generateAmount(),
                     date: date,
-                    isToday: false
+                    isToday: false,
+                    category: 'month'
                 });
             }
 
-            // Generate 30 more payouts for the last 30 days
+            // Generate 30 more payouts for the last 30 days (excluding current month)
             for (let i = 0; i < 30; i++) {
                 const daysAgo = Math.floor(Math.random() * 30) + 1;
                 const date = new Date(today);
                 date.setDate(date.getDate() - daysAgo);
+                
+                // Skip if it falls in current month
+                if (date.getMonth() === currentMonth && date.getFullYear() === currentYear) {
+                    date.setMonth(date.getMonth() - 1);
+                }
+                
+                const hour = 8 + Math.floor(Math.random() * 10);
+                const minute = Math.floor(Math.random() * 60);
+                date.setHours(hour, minute, 0, 0);
+                
                 const bank = getRandomBank();
+                
                 payouts.push({
+                    name: getUniqueName(),
                     bank: bank,
                     accountNumber: generateAccountNumber(),
                     amount: generateAmount(),
                     date: date,
-                    isToday: false
+                    isToday: false,
+                    category: 'last30'
                 });
             }
 
@@ -402,10 +594,8 @@
             return date.toLocaleDateString('en-ZA', { 
                 day: '2-digit', 
                 month: 'short', 
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+                year: 'numeric'
+            }) + ', ' + date.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
         }
 
         function renderPayouts(payouts) {
@@ -422,18 +612,21 @@
                     <div class="payout-left">
                         <div class="bank-icon ${payout.bank.class}">${payout.bank.abbr}</div>
                         <div class="payout-info">
+                            <div class="recipient-name">${payout.name}</div>
                             <div class="bank-name">${payout.bank.name}</div>
-                            <div class="account-number">Account: ****${payout.accountNumber}</div>
+                            <div class="account-number">****${payout.accountNumber}</div>
                         </div>
                     </div>
+                    <div class="payout-middle">
+                        <div class="paid-from">Paid From</div>
+                        <div class="oyster-badge">Oyster Loan</div>
+                    </div>
                     <div class="payout-right">
-                        <div>
-                            <div class="amount">R ${parseFloat(payout.amount).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                            <div class="date">${formatDate(payout.date)}</div>
-                        </div>
+                        <div class="amount">R ${parseFloat(payout.amount).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div class="date">${formatDate(payout.date)}</div>
                         <div class="status">
                             <span class="status-dot"></span>
-                            Paid
+                            Successful
                         </div>
                     </div>
                 `;
@@ -462,6 +655,12 @@
                 filtered = allPayouts.filter(p => 
                     p.date.getMonth() === currentMonth && 
                     p.date.getFullYear() === currentYear
+                );
+            } else if (filter === 'last30') {
+                const currentMonth = today.getMonth();
+                const currentYear = today.getFullYear();
+                filtered = allPayouts.filter(p => 
+                    !(p.date.getMonth() === currentMonth && p.date.getFullYear() === currentYear)
                 );
             }
 
